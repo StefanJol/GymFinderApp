@@ -22,7 +22,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const user = queryResult[0];
-    const [salt, originalHash] = user.password_hash.split(":");
+    const [salt, originalHash] = user.user_password.split(":");
 
     crypto.pbkdf2(password, salt, 1000, 64, "sha512", (err, derivedKey) => {
       if (err) return next(err);
@@ -37,8 +37,8 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
         message: "Login successful.",
         user: {
           id: user.id,
-          username: user.username,
-          email: user.email,
+          username: user.user_name,
+          email: user.user_email,
         },
       });
     });
@@ -64,14 +64,19 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
       if (err) return next(err);
 
       const passwordHash = salt + ":" + derivedKey.toString("hex");
-      const queryResult = await createUser(username, email, passwordHash);
+      
+      try {
+        const queryResult = await createUser(username, email, passwordHash);
 
-      if (queryResult.affectedRows === 1) {
-        res.status(201).json({ success: true, message: "User registered." });
-        return;
+        if (queryResult.affectedRows === 1) {
+          res.status(201).json({ success: true, message: "User registered." });
+          return;
+        }
+
+        res.status(500).json({ success: false, message: "User was not registered." });
+      } catch (dbError) {
+        next(dbError);
       }
-
-      res.status(500).json({ success: false, message: "User was not registered." });
     });
   } catch (error) {
     next(error);
