@@ -55,6 +55,13 @@ export async function addFavorite(userId: number, gymId: number) {
   );
 }
 
+export async function removeFavorite(userId: number, gymId: number) {
+  await pool.query(
+    "DELETE FROM user_favorite_gyms WHERE user_id = ? AND gym_id = ?",
+    [userId, gymId]
+  );
+}
+
 export async function getFavorites(userId: number) {
   const [rows]: any = await pool.query(
     "SELECT g.* FROM gym g JOIN user_favorite_gyms f ON g.id = f.gym_id WHERE f.user_id = ?",
@@ -62,4 +69,30 @@ export async function getFavorites(userId: number) {
   );
   return rows;
 }
+// Adding and Reading reviews of gyms
+export async function addReview(userId: number, gymId: number, rating: number, comment: string) {
+  const [result] = await pool.query(
+    "INSERT INTO review (user_id, gym_id, rating, comment) VALUES (?, ?, ?, ?)",
+    [userId, gymId, rating, comment]
+  );
+  return result;
+}
+
+export async function getGymReviews(gymId: number) {
+  const [rows]: any = await pool.query(
+    "SELECT r.*, u.user_name FROM review r JOIN user_login u ON r.user_id = u.id WHERE r.gym_id = ? ORDER BY r.created_at DESC",
+    [gymId]
+  );
+  return rows;
+}
+
+// Admin insert new gym function
+export async function addGym(name: string, city: string) {
+  const [result] = await pool.query(
+    "INSERT INTO gym (name, city, is_active) VALUES (?, ?, 1)",
+    [name, city]
+  );
+  return result;
+}
+
 export default pool;

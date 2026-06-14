@@ -4,6 +4,7 @@ import cors from "cors";
 import usersRouter from "./routes/users.routes.js";
 import gymsRouter from "./routes/gyms.routes.js";
 import favoritesRouter from "./routes/favorites.routes.js";
+import reviewsRouter from "./routes/reviews.routes.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 5000;
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/users", usersRouter);
 app.use("/gyms", gymsRouter);
 app.use("/favorites", favoritesRouter);
+app.use("/reviews", reviewsRouter);
 
 app.get("/", (_req: Request, res: Response) => {
   res.send("Hello from Express 5 and TypeScript");
