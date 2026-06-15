@@ -11,21 +11,18 @@ export default function Menu() {
 
   return (
     <nav>
-      
       <Link to="/gyms">Gyms</Link>
-      
-      <Link to="/about">About</Link>
 
       {user ? (
         <>
-        
+          <Link to="/partners">Find Partners</Link>
           <span>Logged in as: {user.username}</span>
-          <button onClick={handleLogout} style={{ marginLeft: "10px" }}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <>
-          <Link to="/login" style={{ marginLeft: "10px" }}>Login</Link>
-          <Link to="/register" style={{ marginLeft: "10px" }}>Register</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </>
       )}
     </nav>

@@ -95,4 +95,68 @@ export async function addGym(name: string, city: string) {
   return result;
 }
 
+// Fetch all members except the logged-in user
+// Fetch all members with their connection status relative to the current user
+export async function getAllMembers(currentUserId: number) {
+  const [rows]: any = await pool.query(
+    `SELECT 
+      u.id, 
+      u.user_name, 
+      u.user_email,
+      CASE 
+        WHEN (c.sender_id = ? OR c.receiver_id = ?) AND c.status = 'accepted' THEN 'accepted'
+        WHEN c.sender_id = ? AND c.status = 'pending' THEN 'pending'
+        WHEN c.receiver_id = ? AND c.status = 'pending' THEN 'incoming'
+        ELSE 'none'
+      END AS connection_status
+     FROM user_login u
+     LEFT JOIN user_connection c ON 
+       (c.sender_id = ? AND c.receiver_id = u.id) OR 
+       (c.receiver_id = ? AND c.sender_id = u.id)
+     WHERE u.id != ?`,
+    [
+      currentUserId, currentUserId, // checking accepted status - yeah i needed help here. did not know what to do
+      currentUserId,                 // checking if current user sent a pending request
+      currentUserId,                 // checking if current user received a pending request
+      currentUserId, currentUserId, // LEFT JOIN matching rules
+      currentUserId                  // exclude the logged-in user themselves
+    ]
+  );
+  return rows;
+}
+
+// Create a pending connection request
+export async function sendConnectionRequest(senderId: number, receiverId: number) {
+  await pool.query(
+    "INSERT INTO user_connection (sender_id, receiver_id, status) VALUES (?, ?, 'pending')",
+    [senderId, receiverId]
+  );
+}
+
+// Fetch pending requests received by a specific user
+export async function getPendingRequests(receiverId: number) {
+  const [rows]: any = await pool.query(
+    "SELECT c.id AS connection_id, u.user_name FROM user_connection c JOIN user_login u ON c.sender_id = u.id WHERE c.receiver_id = ? AND c.status = 'pending'",
+    [receiverId]
+  );
+  return rows;
+}
+
+// Accept a request and change status to 'accepted'
+export async function acceptConnectionRequest(connectionId: number) {
+  await pool.query(
+    "UPDATE user_connection SET status = 'accepted' WHERE id = ?",
+    [connectionId]
+  );
+}
+
+// Delete the connection between two users
+export async function removeWorkoutPartner(userId: number, partnerId: number) {
+  await pool.query(
+    `DELETE FROM user_connection 
+     WHERE (sender_id = ? AND receiver_id = ?) 
+        OR (sender_id = ? AND receiver_id = ?)`,
+    [userId, partnerId, partnerId, userId]
+  );
+}
 export default pool;
