@@ -109,3 +109,27 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+html, body, #root {
+  background-color: #ffffff !important;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+
+main, section, div {
+  background-color: transparent;
+}
+
+
+.auth-container {
+  background-color: #ffffff !important;
+}
+
+.hub-header {
+  background-color: #f4f4f6;
+}

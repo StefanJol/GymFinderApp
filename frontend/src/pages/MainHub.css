@@ -1,0 +1,95 @@
+.partners-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .hub-header {
+    background-color: #f4f4f6;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hub-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .map-section {
+    margin-bottom: 35px;
+  }
+  
+  .map-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+  }
+  
+  .search-box {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    border: 1px solid #eee;
+  }
+
+  .search-input {
+    color: #ffffff;            
+    background-color: #333333; 
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .section-title-pending { border-bottom: 2px solid #ff9900; padding-bottom: 5px; text-align: left; }
+  .section-title-active  { border-bottom: 2px solid #2ecc71; padding-bottom: 5px; text-align: left; }
+  .section-title-discover { border-bottom: 2px solid #3498db; padding-bottom: 5px; text-align: left; }
+  
+  .request-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #fff9e6;
+    border-left: 5px solid #ff9900;
+    border-radius: 4px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .partner-card {
+    padding: 15px;
+    border: 1px solid #2ecc71;
+    border-radius: 8px;
+    background-color: #f9fffb;
+    text-align: center;
+  }
+  
+  .member-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .btn-accept  { padding: 6px 12px; background-color: #ff9900; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+  .btn-message { padding: 6px 10px; background-color: #2ecc71; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+  .btn-remove  { padding: 6px 10px; background-color: #e74c3c; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+  .btn-connect { padding: 6px 12px; background-color: #3498db; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+  .btn-pending { padding: 6px 12px; background-color: #bbb; color: #fff; border: none; border-radius: 4px; }

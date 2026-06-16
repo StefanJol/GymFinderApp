@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Register.css";
 
 const API_URL = "http://localhost:5000";
 
@@ -6,80 +7,76 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    setMessage("Sending request...");
-
     try {
       const response = await fetch(`${API_URL}/users/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
       });
 
       const data = await response.json();
 
-      if (response.ok) {
-        setMessage("Success: User registered!");
+      if (data.success) {
+        alert("Registration successful! Please login.");
+        window.location.href = "/login";
       } else {
-        setMessage(`Error: ${data.message || "Registration failed"}`);
+        alert(data.message);
       }
-    } catch (error) {
-      console.error("Network error:", error);
-      setMessage("Error: Could not connect to backend server.");
+    } catch (err) {
+      console.error(err);
+      alert("Error registering user.");
     }
   };
 
   return (
-    <main className="login-page">
-      <section className="login-card">
-        <h1>Register</h1>
+    <div className="auth-container">
+      <div className="auth-card">
+        <img src="/logo.png" alt="Gym Logo" className="auth-logo" />
+        <h1 className="auth-title">Create Account</h1>
         
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Username</label>
+        <form onSubmit={handleRegisterSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="reg-username" className="form-label">Username</label>
             <input 
+              id="reg-username"
               type="text" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              className="form-input"
+              required 
             />
           </div>
-          <div>
-            <label>Email</label>
-            <input 
-              type="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Password</label>
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit">Sign Up</button>
-        </form>
 
-        {message && (
-          <p className="status-message" style={{ marginTop: '15px', color: message.startsWith('Success') ? 'green' : 'red' }}>
-            {message}
-          </p>
-        )}
-      </section>
-    </main>
+          <div className="form-group">
+            <label htmlFor="reg-email" className="form-label">Email Address</label>
+            <input 
+              id="reg-email"
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              className="form-input"
+              required 
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="reg-password" className="form-label">Password</label>
+            <input 
+              id="reg-password"
+              type="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              className="form-input"
+              required 
+            />
+          </div>
+
+          <button type="submit" className="btn-register">Register Account</button>
+        </form>
+      </div>
+    </div>
   );
 }

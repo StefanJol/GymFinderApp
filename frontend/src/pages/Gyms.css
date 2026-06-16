@@ -1,0 +1,206 @@
+.gyms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: sans-serif;
+    color: #000000;
+    text-align: center;
+  }
+  
+  .gyms-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .gyms-title {
+    color: #000000;
+    margin: 10px 0;
+  }
+  
+  .btn-back {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+  
+  .admin-section {
+    padding: 20px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    background-color: #ffffff;
+  }
+  
+  .admin-title {
+    color: #000000;
+    margin-top: 0;
+  }
+  
+  .admin-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .admin-input {
+    color: #ffffff;            
+    background-color: #333333; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn-admin-add {
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #000000;
+  }
+  
+  .admin-divider {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin-bottom: 40px;
+  }
+  
+  .search-form {
+    margin-bottom: 30px;
+  }
+  
+  .search-input {
+    color: #ffffff;         
+    background-color: #333333; 
+    padding: 10px;
+    width: 250px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn-search {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #000000;
+  }
+  
+  .gyms-list {
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  
+  .gym-card {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+  }
+  
+  .gym-card-title {
+    color: #000000;
+    margin: 0 0 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .btn-action {
+    padding: 4px 8px;
+    cursor: pointer;
+    color: #000000;
+  }
+  
+  .gym-location {
+    color: #000000;
+    margin: 0 0 10px 0;
+  }
+  
+  .reviews-container {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+  }
+  
+  .reviews-summary {
+    color: #000000;
+    margin: 0 0 10px 0;
+  }
+  
+  .reviews-list {
+    margin-bottom: 15px;
+  }
+  
+  .review-item {
+    padding: 5px 0;
+    color: #000000;
+    border-bottom: 1px dashed #eee;
+  }
+  
+  .review-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .review-select {
+    color: #ffffff !important;           
+    background-color: #333333 !important; 
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .review-input {
+    color: #ffffff !important;           
+    background-color: #333333 !important; 
+    padding: 6px;
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn-post-review {
+    padding: 6px 12px;
+    cursor: pointer;
+    color: #000000;
+  }
+  
+  .bookmarks-section {
+    text-align: left;
+  }
+  
+  .bookmarks-title {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 5px;
+  }
+  
+  .bookmark-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .bookmark-text {
+    color: #000000;
+  }
+  
+  .btn-remove-bookmark {
+    padding: 4px 8px;
+    cursor: pointer;
+    background-color: #e74c3c;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+  }
