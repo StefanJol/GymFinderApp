@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import "./Login.css";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "http://localhost:3000";
 
 export default function Login() {
   const [username, setUsername] = useState("");
