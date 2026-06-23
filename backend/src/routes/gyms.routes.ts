@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { searchGyms, addGym } from "../db/database.js"; // <-- Make sure addGym is imported here
+import { searchGyms, addGym } from "../db/database.js"; 
 
 const router = Router();
 
-// 1. Existing search route
+// Existing search route
 router.get("/", async (req: Request, res: Response) => {
   try {
     const city = String(req.query.city || "").trim();
@@ -14,7 +14,7 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
-// 2. Add this POST route to accept new gym entries from the admin form
+// POST route to accept new gym entries from the admin form
 router.post("/", async (req: Request, res: Response) => {
   try {
     const { name, city } = req.body;
