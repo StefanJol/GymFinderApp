@@ -1,13 +1,23 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { createUser, authUser } from "./db/database.js";
 
-const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+// serve frontend
+// tells express to look inside dist
+const reactBuildPath = path.join(__dirname, "./dist"); 
+app.use(express.static(reactBuildPath));
+
+// existin g api routes
 app.post("/users/register", async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -18,8 +28,13 @@ app.post("/users/register", async (req, res) => {
   }
 });
 
-const PORT = 5000;
+// catch routes for react routere
+app.get("*", (req, res) => {
+  res.sendFile(path.join(reactBuildPath, "index.html"));
+});
 
+// start server
+const PORT = 3000;
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Backend server running cleanly on port ${PORT}`);
+  console.log(`Server is serving BOTH Frontend and Backend cleanly on port ${PORT}`);
 });
