@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./Register.css";
+import { API_URL } from "../config/api";
 
-const API_URL = "http://localhost:3000";
+
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -27,7 +28,7 @@ export default function Register() {
       }
     } catch (err) {
       console.error(err);
-      alert("Error registering user.");
+      alert("Error registering user.", err);
     }
   };
 
