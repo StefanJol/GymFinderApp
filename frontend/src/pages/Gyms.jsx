@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import "./Gyms.css";
-
-const API_URL = "http://localhost:3000";
+import { API_URL } from "../config/api";
 
 export default function Gyms() {
   const [city, setCity] = useState("");
