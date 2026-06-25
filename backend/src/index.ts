@@ -6,9 +6,16 @@ import gymsRouter from "./routes/gyms.routes.js";
 import favoritesRouter from "./routes/favorites.routes.js";
 import reviewsRouter from "./routes/reviews.routes.js";
 import connectionsRouter from "./routes/connections.routes.js";
+// so i dont have to use a js
+import path from "path"; 
+import { fileURLToPath } from "url";
+//
+const __dirname = path.resolve();
+//
+
+
 
 const frontEndApp = express();
-
 const BackEndapp = express();
 const port = Number(process.env.PORT) || 8081;
 const frontEndPort = 8000;
@@ -38,6 +45,18 @@ BackEndapp.use((error: unknown, _req: Request, res: Response, _next: NextFunctio
     message: "Internal server error",
   });
 });
+
+// 
+// frontend config
+const reactBuildPath = path.join(__dirname, "dist"); 
+frontEndApp.use(express.static(reactBuildPath));
+
+// Serves index.html for the frontend routes
+frontEndApp.get("/*splat", (req, res) => {
+  res.sendFile(path.join(reactBuildPath, "index.html"));
+ })
+ 
+
 
 BackEndapp.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
